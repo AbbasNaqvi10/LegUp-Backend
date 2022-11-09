@@ -1,2 +1,1 @@
-# crud-dynamo
-A CRUD API built using nodejs(expressjs) and aws dynamodb.
+# CRUD API with Node.js, Express.js and Dynamo DB
