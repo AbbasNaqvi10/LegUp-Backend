@@ -15,6 +15,17 @@ const getAllItems = async (TABLE_NAME) => {
 	return await DocumentClient.scan(params).promise();
 };
 
+const getItemsByEmailAndPass = async (TABLE_NAME, p_email, p_password) => {
+	const params = {
+		TableName: TABLE_NAME,
+		Key: {
+			email :p_email,
+			password: p_password
+		},
+	};
+	return await DocumentClient.get(params).promise();
+};
+
 const getSingleItemById = async (TABLE_NAME, id) => {
 	const params = {
 		TableName: TABLE_NAME,
@@ -79,4 +90,5 @@ module.exports = {
 	insertItem,
 	updateItem,
 	deleteSingleItemById,
+	getItemsByEmailAndPass
 };
