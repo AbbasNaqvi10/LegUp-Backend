@@ -14,13 +14,12 @@ app.use(morgan('dev'));
 const TABLE_NAME = 'user_info';
 
 
-router.post('/', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     let p_email = req.body.email
     let p_password= req.body.password
      try {
         const items = await getItemsByEmailAndPass(TABLE_NAME,p_email);
-        console.log(items)
-         if (p_email == items.email && p_password == items.password) {
+         if (p_email == items.Item.email && p_password == items.Item.password) {
              var token = jwt.sign(
                  { username: items.last_name },
                 'secretkey',

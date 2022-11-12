@@ -24,7 +24,7 @@ const getItemsByEmailAndPass = async (TABLE_NAME, p_email) => {
 	  };
 	   const data= await DocumentClient.get(params, function(err, data) {
 		 if (err) console.log(err, err.stack); 
-		 else     console.log(data);           
+		//  else     console.log(data);           
 	   }).promise()
 	   return data;
 };
