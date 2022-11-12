@@ -15,15 +15,18 @@ const getAllItems = async (TABLE_NAME) => {
 	return await DocumentClient.scan(params).promise();
 };
 
-const getItemsByEmailAndPass = async (TABLE_NAME, p_email, p_password) => {
-	const params = {
-		TableName: TABLE_NAME,
+const getItemsByEmailAndPass = async (TABLE_NAME, p_email) => {
+	var params = {
+		TableName : TABLE_NAME,
 		Key: {
-			email :p_email,
-			password: p_password
-		},
-	};
-	return await DocumentClient.get(params).promise();
+		  email: p_email
+		}
+	  };
+	   const data= await DocumentClient.get(params, function(err, data) {
+		 if (err) console.log(err, err.stack); 
+		 else     console.log(data);           
+	   }).promise()
+	   return data;
 };
 
 const getSingleItemById = async (TABLE_NAME, id) => {
