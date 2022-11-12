@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
         const items = await getItemsByEmailAndPass(TABLE_NAME,p_email);
          if (p_email == items.Item.email && p_password == items.Item.password) {
              var token = jwt.sign(
-                 { username: items.last_name },
+                 { email: items.Item.email },
                 'secretkey',
                 (err, token) => {
                     res.send({
