@@ -14,9 +14,10 @@ app.use(morgan('dev'));
 const TABLE_NAME = 'user_info';
 
 
-router.get('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     let p_email = req.body.email
     let p_password= req.body.password
+    console.log(req.body)
      try {
         const items = await getItemsByEmailAndPass(TABLE_NAME,p_email);
          if (p_email == items.Item.email && p_password == items.Item.password) {
@@ -27,7 +28,7 @@ router.get('/', async (req, res, next) => {
                     res.send({
                         tokenAuth: token,
                         ok: true,
-                        message: "Login successful"
+                        message: "Login successful",
                     })
                     res.status(200).json(items);
                 })
