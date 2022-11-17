@@ -4,7 +4,7 @@ const morgan = require('morgan');
 var jwt = require("jsonwebtoken")
 
 require('dotenv').config();
-const { getAllItems, insertItem, updateItem, getSingleItemById, deleteSingleItemById, getItemsByEmailAndPass } = require('../dynamo');
+const { getAllItems, insertItem, updateItem, getSingleItemById, deleteSingleItemById, getItemsByEmailAndPass } = require('../methods/dynamo');
 
 var app = express();
 
