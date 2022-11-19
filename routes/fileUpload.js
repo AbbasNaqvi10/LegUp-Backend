@@ -22,7 +22,7 @@ const upload= multer({
 })
 
 
-router.post('/', upload.array('file'), async (req, res, next) => {
+router.post('/', upload.any('file'), async (req, res, next) => {
     try {
         var myResults = await fileUploaderForS3(req.files)
         res.json({ myResults })
