@@ -86,25 +86,57 @@ const deleteSingleItemById = async (TABLE_NAME, id) => {
 	return await DocumentClient.delete(params).promise();
 };
 
-const StoredFileLocation= async(files,nameAndLocation)=>{
-	for(let i =0;i<files.length;i++){
-	  var params = {
+// const StoredFileLocation= async(files,nameAndLocation,)=>{
+// 	for(let i =0;i<files.length;i++){
+// 		  var params = {
+// 			TableName : 's3_file_storage_location' ,
+// 			Item:{
+// 		  		random:`xxx${i}`,
+// 				user_id:'0',
+// 				// nameOfFile: forFileLocationOnlyValue[i],
+// 			  nameOfFile:nameAndLocation[0][i].f,
+// 			  locate:nameAndLocation[0][i].l
+// 			}
+// 	  	};
+// 		var documentClient = new AWS.DynamoDB.DocumentClient();
+// 		documentClient.put(params, function(err,data) {
+// 	  		if (err) console.log(err);
+// 	  		else {console.log(data)}
+// 		});
+// 	}
+//}
+
+const StoredFileLocation= async(files,forFileLocationOnlyValue)=>{
+	var documentClient = new AWS.DynamoDB.DocumentClient();
+
+	var params = {
 		TableName : 's3_file_storage_location' ,
-		Item: {
-		  random:`xxx${i}`,
-		  user_id:'0',
-		  nameOfFile:nameAndLocation[0][i].f,
-		  locate:nameAndLocation[0][i].l
+		Item:{
+		  		random:'0',
+				user_id:'0',
+				APPLE_FILE_1: forFileLocationOnlyValue[0],
+			  
 		}
-	  };
-	  var documentClient = new AWS.DynamoDB.DocumentClient();
-  
+  	};
 	documentClient.put(params, function(err,data) {
-	  if (err) console.log(err);
-	  else {console.log(data)}
+	  		if (err) console.log(err);
+	  		else {console.log(data)}
 	});
-	}
-  }
+// -------------------------------------file no 2-------------------------------------------------
+	var params = {
+		TableName : 's3_file_storage_location' ,
+		Item:{
+				random:`1`,
+				user_id:'0',
+				APPLE_FILE_2: forFileLocationOnlyValue[1],
+			}
+	};
+	documentClient.put(params, function(err,data) {
+			if (err) console.log(err);
+			else {console.log(data)}
+	});
+
+}
 
 module.exports = {
 	DocumentClient,

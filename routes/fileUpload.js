@@ -6,7 +6,7 @@ var jwt = require("jsonwebtoken")
 
 require('dotenv').config();
 
-const { fileUploaderForS3, forFileLocationAndName} = require('../methods/s3');
+const { fileUploaderForS3,forFileLocationOnly} = require('../methods/s3');
 const { StoredFileLocation} = require('../methods/dynamo');
 
 var app = express();
@@ -28,7 +28,7 @@ router.post('/', upload.array('file'), async (req, res, next) => {
         res.json({ myResults })
     }
     catch (err) { console.log(err) }
-    const forFileLocationAndNameValue = await forFileLocationAndName(myResults, req.files)
-    StoredFileLocation(req.files, forFileLocationAndNameValue)
+    const forFileLocationOnlyValue = await forFileLocationOnly(myResults, req.files)
+    StoredFileLocation(req.files, forFileLocationOnlyValue)
 })
 module.exports = router;

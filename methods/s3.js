@@ -23,22 +23,32 @@ const fileUploaderForS3=async(files)=>{
       s3.upload(param).promise()))
 }
 
-const forFileLocationAndName=async(myResults,files)=>{
-    var i = 0
-    console.log(files.length)
-    var nameAndLocation=  files.map((file)=>{
-      const f= file.originalname
-      const l=myResults[i].Location
+const forFileLocationOnly=async (myResults,files)=>{
+  let i=0
+  while(i<files.length){
+    const l=myResults[i].Location
+    arr.push(l)
+    i++}
+    console.log(arr)
+    return arr
+}
+// const forFileLocationAndName=async(myResults,files)=>{
+//     var i = 0
+//     console.log(files.length)
+//     var nameAndLocation=  files.map((file)=>{
+//       const f= file.originalname
+//       const l=myResults[i].Location
       
-      arr.push({f,l})
-      i++
-      return arr
-    }) 
-    return nameAndLocation
-    //console.log(nameAndLocation[0][0].f) 
-  }
+//       arr.push({f,l})
+//       i++
+//       return arr
+//     }) 
+//     return nameAndLocation
+//     //console.log(nameAndLocation[0][0].f) 
+//   }
 
 module.exports={
     fileUploaderForS3,
-    forFileLocationAndName
+    forFileLocationOnly
+    //forFileLocationAndName
 };
